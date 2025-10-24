@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class CustomerResponse {
-    private Long id;
+    private String id;
     private String name;
     private String lastName;
     private String documentNumber;

@@ -1,11 +1,10 @@
-package com.project.bank.customer.model.entity;
+package com.project.bank.customer.model.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
@@ -13,17 +12,12 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "customers")
-public class Customer {
-    @Id
-    private String id;
+@Builder
+public class CustomerRequest {
     private String name;
     private String lastName;
     private String documentNumber;
     private String documentType;
     private String customerType;
     private LocalDate birthDate;
-    private LocalDate registrationDate;
-    private LocalDate modificationDate;
-    private boolean status;
 }
