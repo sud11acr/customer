@@ -1,0 +1,30 @@
+package com.project.bank.customer.expose;
+
+import com.project.bank.customer.model.response.CustomerResponse;
+import com.project.bank.customer.service.CustomerService;
+import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+@Slf4j
+@RequestMapping("v1/api/customers")
+public class CustomerController {
+    private final CustomerService customerService;
+
+    @GetMapping
+    public Maybe<ResponseEntity<Flowable<CustomerResponse>>> getAllCustomers() {
+        log.info("Begin getAllCustomers - CustomerController");
+        return Maybe.just(ResponseEntity.ok(customerService.getAllCustomers()))
+                .doOnSuccess(response ->
+                        log.info("End getAllCustomers - CustomerController"))
+                .doOnError(error ->
+                        log.error("Error in getAllCustomers - {}", error.getMessage(), error));
+    }
+}
