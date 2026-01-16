@@ -6,5 +6,7 @@ import io.reactivex.Observable;
 
 public interface CustomerDao {
     Observable<Customer> getAllCustomers();
+    Observable<Customer> getCustomerById(String id);
     Completable saveCustomer(Customer customer);
+    Completable deleteCustomerById(String id);
 }

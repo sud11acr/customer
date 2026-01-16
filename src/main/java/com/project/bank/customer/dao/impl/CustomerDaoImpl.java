@@ -17,6 +17,7 @@ import reactor.adapter.rxjava.RxJava2Adapter;
 @Slf4j
 public class CustomerDaoImpl implements CustomerDao {
     private final CustomerRepository customerRepository;
+
     @Override
     public Observable<Customer> getAllCustomers() {
         return RxJava2Adapter.fluxToObservable(customerRepository.findAll())
@@ -26,10 +27,31 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
+    public Observable<Customer> getCustomerById(String id) {
+        return RxJava2Adapter.monoToSingle(customerRepository.findById(id))
+                .toObservable()
+                .onErrorResumeNext(throwable -> {
+                    log.error("Error fetching customer with id: {}", id, throwable);
+                    return Observable.empty();
+                })
+                .subscribeOn(io())
+                .doOnSubscribe(disposable ->
+                        log.info("Fetching customer with id: {} from the database", id));
+    }
+
+    @Override
     public Completable saveCustomer(Customer customer) {
         return RxJava2Adapter.monoToCompletable(customerRepository.save(customer))
                 .subscribeOn(io())
                 .doOnError(error -> log.error("Error saving customer: {}", customer, error))
                 .doOnComplete(() -> log.info("Customer saved successfully: {}", customer));
+    }
+
+    @Override
+    public Completable deleteCustomerById(String id) {
+        return RxJava2Adapter.monoToCompletable(customerRepository.deleteById(id))
+                .subscribeOn(io())
+                .doOnComplete(() -> log.info("Customer deleted successfully: {}", id))
+                .doOnError(error -> log.error("Error deleting customer with id: {}", id, error));
     }
 }

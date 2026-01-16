@@ -1,6 +1,7 @@
 package com.project.bank.customer.service.impl;
 
 import com.project.bank.customer.dao.CustomerDao;
+import com.project.bank.customer.exception.NotFoundException;
 import com.project.bank.customer.mapper.CustomerMapper;
 import com.project.bank.customer.model.request.CustomerRequest;
 import com.project.bank.customer.model.response.CustomerResponse;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerDao customerDao;
     private final CustomerMapper customerMapper;
+
     @Override
     public Flowable<CustomerResponse> getAllCustomers() {
         return customerDao.getAllCustomers()
@@ -37,5 +39,16 @@ public class CustomerServiceImpl implements CustomerService {
                 .doOnError(error ->
                         log.error("Error saving customer: {}", error.getMessage(), error))
                 .doOnComplete(() -> log.info("Customer saved successfully"));
+    }
+
+    @Override
+    public Completable deleteCustomerById(String id) {
+        return customerDao.getCustomerById(id)
+                .switchIfEmpty(Observable.error(
+                        new NotFoundException("Customer with id " + id + " not found")))
+                .flatMapCompletable(customer -> customerDao.deleteCustomerById(id))
+                .doOnComplete(() -> log.info("Customer deleted successfully"))
+                .doOnError(error ->
+                        log.error("Error deleting customer: {}", error.getMessage(), error));
     }
 }

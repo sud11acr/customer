@@ -8,4 +8,5 @@ import io.reactivex.Flowable;
 public interface CustomerService {
     Flowable<CustomerResponse> getAllCustomers();
     Completable saveCustomer(CustomerRequest customerRequest);
+    Completable deleteCustomerById(String id);
 }
