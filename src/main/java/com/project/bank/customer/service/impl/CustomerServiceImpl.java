@@ -2,8 +2,9 @@ package com.project.bank.customer.service.impl;
 
 import com.project.bank.customer.dao.CustomerDao;
 import com.project.bank.customer.mapper.CustomerMapper;
-import com.project.bank.customer.model.request.CustomerRequest;
-import com.project.bank.customer.model.response.CustomerResponse;
+import com.project.bank.customer.domain.request.CustomerRequest;
+import com.project.bank.customer.domain.response.CustomerResponse;
+import com.project.bank.customer.proxy.ProductProxy;
 import com.project.bank.customer.service.CustomerService;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerDao customerDao;
     private final CustomerMapper customerMapper;
+    private final ProductProxy productProxy;
     @Override
     public Flowable<CustomerResponse> getAllCustomers() {
         return customerDao.getAllCustomers()

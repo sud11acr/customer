@@ -1,6 +1,6 @@
 package com.project.bank.customer.dao;
 
-import com.project.bank.customer.model.entity.Customer;
+import com.project.bank.customer.domain.entity.Customer;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 

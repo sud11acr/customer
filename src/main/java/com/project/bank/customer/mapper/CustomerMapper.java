@@ -1,8 +1,8 @@
 package com.project.bank.customer.mapper;
 
-import com.project.bank.customer.model.entity.Customer;
-import com.project.bank.customer.model.request.CustomerRequest;
-import com.project.bank.customer.model.response.CustomerResponse;
+import com.project.bank.customer.domain.entity.Customer;
+import com.project.bank.customer.domain.request.CustomerRequest;
+import com.project.bank.customer.domain.response.CustomerResponse;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

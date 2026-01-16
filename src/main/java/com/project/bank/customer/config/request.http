@@ -1,0 +1,8 @@
+### Crear un nuevo usuario
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Aaron",
+  "email": "aaron@example.com"
+}

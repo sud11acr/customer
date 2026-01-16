@@ -1,7 +1,7 @@
 package com.project.bank.customer.expose;
 
-import com.project.bank.customer.model.request.CustomerRequest;
-import com.project.bank.customer.model.response.CustomerResponse;
+import com.project.bank.customer.domain.request.CustomerRequest;
+import com.project.bank.customer.domain.response.CustomerResponse;
 import com.project.bank.customer.service.CustomerService;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;

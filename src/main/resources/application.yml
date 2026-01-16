@@ -4,3 +4,6 @@ spring:
       host: localhost
       port: 27017
       database: customers
+application:
+  http-client:
+    product-url: 'http://localhost:8081'

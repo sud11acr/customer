@@ -3,7 +3,7 @@ package com.project.bank.customer.dao.impl;
 import static io.reactivex.schedulers.Schedulers.io;
 
 import com.project.bank.customer.dao.CustomerDao;
-import com.project.bank.customer.model.entity.Customer;
+import com.project.bank.customer.domain.entity.Customer;
 import com.project.bank.customer.repository.CustomerRepository;
 import io.reactivex.Completable;
 import io.reactivex.Observable;

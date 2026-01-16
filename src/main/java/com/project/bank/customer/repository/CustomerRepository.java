@@ -1,6 +1,6 @@
 package com.project.bank.customer.repository;
 
-import com.project.bank.customer.model.entity.Customer;
+import com.project.bank.customer.domain.entity.Customer;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
